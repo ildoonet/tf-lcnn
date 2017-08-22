@@ -1,0 +1,12 @@
+model: alexnet
+datasets:
+  - name: mnist
+    optimizer: adagrad
+    iteration: 100000
+    batchsize: 32
+    learningrate: 0.01
+model_conf:
+  lcnnbest:
+    initial_sparsity: [0.5, 0.5, 0.5, 0.5, 0.5]
+    dictionary: [16, 32, 32, 32, 32]
+    activation: relu
