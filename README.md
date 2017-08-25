@@ -1,41 +1,63 @@
-# tf-lcnn
+# tf-lcnn : Predict Faster using Models Trained Fast with Multi-GPUs
+
 Tensorflow implementation for ['LCNN: Lookup-based Convolutional Neural Network'](https://arxiv.org/abs/1611.06473)
 
-## Status
+This also have an implementations multi-gpu training codes for various models, so you can train your own model faster and predict images faster with Lookup Convolutions.
+
+## Implementations
+
+[x] Achieve MNist, ILSVRC2012 Baseline
+
+[x] Training Imagenet on Multiple node with multiple gpus
 
 [x] Training Code - Lookup-based Convolution Layer
+
 [ ] Same training result as the original paper
+
 [ ] Inference Code - Optimized Dense Matrix Operation
+
 [ ] Fast inference speed as the original paper
 
-## Test Results
+## Training Results
 
-### MNIST DataSet
+### MNIST Dataset on Single/Multi-GPU Cluster
 
-While imeplementing lookup-convolutional layer in LCNN paper, MNIST dataset and few known network architectures are used to verify.
+| Model           | GPU                 | Accuracy       | Training Time    | Etc                        |
+|:----------------|:--------------------|---------------:|:-----------------| |
+| Lenet           | 1 GPU               | 99.44%         | 21 Min           | |
+| Lenet           | 8 GPU x 1 Machine   | 99.40%         | 2 Min 26 Sec     | |
+| Alexnet         | 1 GPU               |                |                  | Resized 224x224 from 28x28 |
 
-| Model       | Accuracy | Inference Time |
-|:-----------:|---------:|---------------:|
-|Lenet        |99.05%    | |
-|Alexnet      |99.20%    | |
-|Lenet-LCNN   |98.44%    | |
-|Alexnet-LCNN | | |
+### Imagenet ILSVRC2012 Classification Task
 
-TODO : Accuracy-Speed Trade off table
+## Inference Tests
 
-## References
+
+
+## References & Opensource Pakcages
 
 [1] [LCNN: Lookup-based Convolutional Neural Network](https://arxiv.org/abs/1611.06473)
-[2] http://openresearch.ai/t/lcnn-lookup-based-convolutional-neural-network
-[3] [ImageNet Classification with Deep Convolutional Neural Networks](https://papers.nips.cc/paper/4824-imagenet-classification-with-deep-convolutional-neural-networks)
-[4] https://github.com/mouradmourafiq/tensorflow-convolution-models
-[5] https://github.com/hpssjellis/easy-tensorflow-on-cloud9/blob/master/aymericdamien-Examples/examples/alexnet.py
-[6] imgaug : https://github.com/aleju/imgaug
-[7] pyYaml : http://pyyaml.org/wiki/PyYAMLDocumentation
-[8] python-mnist : https://github.com/sorki/python-mnist
-[9] author's code : https://github.com/hessamb/lcnn/blob/master/layers/PooledSpatialConvolution.lua
 
-[] https://github.com/dontfollowmeimcrazy/imagenet
+[2] http://openresearch.ai/t/lcnn-lookup-based-convolutional-neural-network
+
+[3] author's code : https://github.com/hessamb/lcnn/blob/master/layers/PooledSpatialConvolution.lua
+
+[4] [ImageNet Classification with Deep Convolutional Neural Networks](https://papers.nips.cc/paper/4824-imagenet-classification-with-deep-convolutional-neural-networks)
+
+[] imagenet training on alexnet : https://github.com/dontfollowmeimcrazy/imagenet
+
+[] https://github.com/mouradmourafiq/tensorflow-convolution-models
+
+[] Distributed Tensorflow : https://www.tensorflow.org/deploy/distributed
+
+[] https://github.com/hpssjellis/easy-tensorflow-on-cloud9/blob/master/aymericdamien-Examples/examples/alexnet.py
+
 [] https://github.com/sugyan/tensorflow-mnist
+
+[] https://github.com/sorki/python-mnist
+
 [] https://github.com/grfiv/MNIST/blob/master/MNIST.pdf
-[] disco: https://github.com/discoproject/disco/
+
+[] imgaug : https://github.com/aleju/imgaug
+
+[] Giridhar Pemmasani, "dispy: Distributed and Parallel Computing with/for Python", http://dispy.sourceforge.net, 2016.

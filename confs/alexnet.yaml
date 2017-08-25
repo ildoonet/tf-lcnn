@@ -1,10 +1,22 @@
 model: alexnet
 datasets:
-  - name: mnist
+  mnist224:
     optimizer: adagrad
-    iteration: 100000
-    batchsize: 32
-    learningrate: 0.01
+    iteration: 140000
+    batchsize: 64
+    dropkeep: 0.5
+    learningrate: [0.01, 0.005, 0.02, 0.01, 0.001, 0.0005]
+    lrstep: [65000, 67000, 70000, 90000, 100000]
+    resize: 224
+  ilsvrc2012:
+    optimizer: sgd
+    iteration: 600000
+    batchsize: 128
+    dropkeep: 0.5
+#    learningrate: [0.0001, 0.0002, 0.0001, 0.00001, 0.000005, 0.000001]
+    learningrate: [0.01, 0.015, 0.01, 0.001, 0.0005]
+    lrstep: [125000, 130000, 150000, 300000, 500000]
+
 model_conf:
   lcnnbest:
     initial_sparsity: [0.5, 0.5, 0.5, 0.5, 0.5]

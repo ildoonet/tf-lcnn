@@ -1,2 +1,5 @@
+scipy
 pyyaml
 python-mnist
+psutil
+imgaug
