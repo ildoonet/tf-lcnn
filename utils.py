@@ -4,6 +4,13 @@ import os
 import random
 import sys
 import logging
+import hmac
+import hashlib
+import requests
+import base64
+import threading
+from datetime import datetime
+from urllib.parse import urlparse
 import concurrent.futures
 from queue import Queue
 
@@ -11,11 +18,13 @@ import numpy as np
 import multiprocessing
 import cv2
 import tensorflow as tf
+from tensorflow.python.training import queue_runner
 import imgaug as ia
 from mnist import MNIST
 from imgaug import augmenters as iaa
 
 logging.basicConfig(stream=sys.stdout, level=logging.DEBUG, format='%(asctime)s %(levelname)s %(message)s')
+logging.getLogger('requests').setLevel(logging.WARNING)
 
 LOG_DIR = '/data/private/tf-lcnn-logs'
 sometimes_1 = lambda aug: iaa.Sometimes(0.1, aug)
@@ -71,11 +80,11 @@ optimizers = {
 
 logstep = {
     'mnist': {
-        'validation': 5000,
-        'training': 1000,
+        'validation': 1000,
+        'training': 500,
     },
     'mnist224': {
-        'validation': 5000,
+        'validation': 2000,
         'training': 1000,
     },
     'ilsvrc2012': {
@@ -83,6 +92,8 @@ logstep = {
         'training': 100,
     }
 }
+
+default_graph = None
 
 
 def flatten_convolution(tensor_in):
@@ -93,7 +104,7 @@ def flatten_convolution(tensor_in):
 
 def dense_layer(tensor_in, layers, activation_fn=tf.nn.tanh, keep_prob=None):
     tensor_out = tensor_in
-    for layer in layers:
+    for idx, layer in enumerate(layers):
         tensor_out = tf.contrib.layers.fully_connected(tensor_out, layer,
                                                        activation_fn=activation_fn,
                                                        weights_initializer=tf.truncated_normal_initializer(0.0, 0.005),
@@ -112,15 +123,41 @@ def get_activation_f(name):
         raise
 
 
-class DataReader:
-    def __init__(self, batchsize):
+class DataReader(tf.FIFOQueue):
+    def __init__(self, batchsize, gpusize, queue_shapes):
+        self.gpusize = gpusize
         self.batchsize = batchsize
-        self.batchsize = batchsize
+        self.queue_shapes = queue_shapes
         self.batch_loader = ia.BatchLoader(self.load_batches)
         self.bg_augmenter = ia.BackgroundAugmenter(batch_loader=self.batch_loader, augseq=self.get_augseq(),
-                                                   nb_workers=multiprocessing.cpu_count() // 8)
+                                                   nb_workers=multiprocessing.cpu_count())
         self.time_image = 0
         self.time_post_process = 0
+
+        super().__init__(capacity=gpusize * 10, dtypes=(tf.uint8, tf.uint8), shapes=queue_shapes)
+
+        self.use_enqueue_thread = False
+
+    def start_enqueue_thread(self, sess, worker_size=2):
+        if not self.use_enqueue_thread:
+            self.use_enqueue_thread = True
+            global default_graph
+            with default_graph.as_default():
+                self.y_ = tf.placeholder(tf.uint8, shape=self.queue_shapes[1])
+                self.x_img = tf.placeholder(tf.uint8, shape=self.queue_shapes[0])
+                self.enqueue_op = self.enqueue((self.x_img, self.y_))
+
+        for _ in range(worker_size):
+            thread = threading.Thread(target=self._batch_enqueue_job, args=(sess,))
+            thread.daemon = True  # Thread will close when parent quits.
+            thread.start()
+
+    def _batch_enqueue_job(self, sess):
+        while True:
+            batch = self.next_batch()
+            sess.run(self.enqueue_op, feed_dict={self.x_img: batch[0], self.y_: batch[1]})
+            # while self.size().eval(session=sess) >= self.gpusize * 10:
+            time.sleep(0.3)
 
     @abc.abstractmethod
     def get_augseq(self):
@@ -153,7 +190,7 @@ class DataReader:
             self.time_image += time.time() - t
 
             try:
-                yield ia.Batch(images=np.array(batch_images), data=batch_data)
+                yield ia.Batch(images=np.array(batch_images), data=np.array(batch_data, dtype=np.uint8))
             except Exception as e:
                 pass
 
@@ -168,9 +205,12 @@ class DataReader:
 
 
 class DataMNIST(DataReader):
-    def __init__(self, path, batchsize):
+    def __init__(self, path, batchsize, gpusize, imgsize=28):
         self.mndata = MNIST(path=path)
-        super().__init__(batchsize)
+        self.images_test, self.labels_test = self.mndata.load_testing()
+        self.images_test = np.asarray(self.images_test, dtype=np.uint8)
+        self.labels_test = np.asarray(self.labels_test, dtype=np.uint8)
+        super().__init__(batchsize, gpusize, queue_shapes=((batchsize, imgsize, imgsize, 1), (batchsize, 10)))
 
     def get_augseq(self):
         return get_augseq('mnist')
@@ -189,7 +229,7 @@ class DataMNIST(DataReader):
 
             # label to one hot
             img = images[_cnt].reshape(28, 28, 1)
-            lb_onehot = np.zeros(10)
+            lb_onehot = np.zeros(10, dtype=np.uint8)
             lb_onehot[labels[_cnt]] = 1
 
             yield img, lb_onehot
@@ -200,15 +240,25 @@ class DataMNIST(DataReader):
         return images.reshape((self.batchsize, 28, 28, 1)), labels
 
     def validation_set(self, page):
-        images_test, labels_test = self.mndata.load_testing()
-        images_test = np.asarray(images_test, dtype=np.uint8)
-        labels_test = np.asarray(labels_test, dtype=np.uint8)
-        labels_test_onehot = np.zeros((len(labels_test), 10))
+        start_idx, end_idx = page * self.batchsize, min((page + 1) * self.batchsize, len(self.images_test))
+
+        images_test = self.images_test[start_idx:end_idx]
+        resizes = []
+        for image in images_test:
+            resizes.append(image)
+        for _ in range(end_idx - start_idx, self.batchsize):
+            resizes.append(np.zeros(784, dtype=np.uint8))
+
+        labels_test = self.labels_test[start_idx:end_idx]
+        labels_test_onehot = np.zeros((self.batchsize, 10), dtype=np.uint8)
         labels_test_onehot[np.arange(len(labels_test)), labels_test] = 1
-        return images_test.reshape(len(images_test), 28, 28, 1), labels_test_onehot, False
+        return np.array(resizes).reshape(len(resizes), 28, 28, 1), labels_test_onehot, end_idx - start_idx, (page + 1) * self.batchsize < len(self.images_test)
 
 
 class DataMNIST224(DataMNIST):
+    def __init__(self, path, batchsize, gpusize):
+        super().__init__(path, batchsize, gpusize, imgsize=224)
+
     def process_batch(self, images, labels):
         images, labels = super(DataMNIST224, self).process_batch(images, labels)
         resizes = []
@@ -217,19 +267,20 @@ class DataMNIST224(DataMNIST):
         return np.array(resizes).reshape(len(resizes), 224, 224, 1), labels
 
     def validation_set(self, page):
-        images, labels, do_more = super(DataMNIST224, self).validation_set(page)
-        start_idx, end_idx = page * self.batchsize, min((page + 1) * self.batchsize, len(images))
+        images, labels, num_data, do_more = super(DataMNIST224, self).validation_set(page)
 
         resizes = []
-        for image in images[start_idx:end_idx]:
+        for image in images:
             resizes.append(cv2.resize(image, (224, 224), interpolation=cv2.INTER_AREA))
-        labels = labels[start_idx:end_idx]
-        return np.array(resizes).reshape(len(resizes), 224, 224, 1), labels, page * (self.batchsize + 1) < len(images)
+
+        return np.array(resizes).reshape(len(resizes), 224, 224, 1), labels, num_data, do_more
 
 
 class DataILSVRC2012(DataReader):
-    def __init__(self, path, batchsize):
+    def __init__(self, path, batchsize, gpusize):
         self.path = path
+        self.http_prefix = 'http://'
+        self.mode = 'local'
 
         # read class list
         with open(os.path.join(path, 'imagenet_lsvrc_synsets.txt'), 'r') as f:
@@ -248,7 +299,7 @@ class DataILSVRC2012(DataReader):
 
         self.image_q = Queue()
 
-        super().__init__(batchsize)
+        super().__init__(batchsize, gpusize, queue_shapes=((batchsize, 224, 224, 3), (batchsize, 10)))
 
     def get_augseq(self):
         return get_augseq('ilsvrc2012')
@@ -262,14 +313,33 @@ class DataILSVRC2012(DataReader):
             self.image_q.put((img, label))
             # return img, label
 
-        with concurrent.futures.ThreadPoolExecutor(max_workers=16) as executor:
+        with concurrent.futures.ThreadPoolExecutor(max_workers=32) as executor:
             future_to_img = {executor.submit(read_image_to_q, path): path for path in filepaths}
             # for future in concurrent.futures.as_completed(future_to_img):
                 # self.image_q.put(future.result())
 
     def read_image(self, filepath=None, validation=False):
         if filepath:
-            img = cv2.imread(os.path.join(self.path, 'Data/CLS-LOC', ('train' if not validation else 'val'), filepath))
+            if self.mode == 'http':
+                host = 'http://twg.kakaocdn.net'
+                service_id = 'braincloud'
+                read_key = b'r_17b3da3e4f39ef69e08a54ff45c2f6'
+                tenth_url = host + '/' + service_id + '/imagenet/ILSVRC/2012/object_localization/ILSVRC/Data/CLS-LOC/' \
+                            + ('val/' if validation else 'train/') + filepath
+
+                datetime_str = datetime.strftime(datetime.utcnow(), '%a, %d %b %Y %H:%M:%S GMT')
+                query = '\n'.join(['GET', '', '', datetime_str, '', urlparse(tenth_url).path]).encode('utf-8')
+                hashv = hmac.new(read_key, query, hashlib.sha1).digest()
+                signature = base64.encodebytes(hashv).rstrip()
+                headers = {
+                    'Authorization': 'TWG %s:%s' % (service_id, signature.decode('utf-8')),
+                    'Date': datetime_str,
+                }
+                resp = requests.get(tenth_url, headers=headers)
+
+                img = cv2.imdecode(np.fromstring(resp.content, dtype=np.uint8), cv2.IMREAD_COLOR)
+            else:
+                img = cv2.imread(os.path.join(self.path, 'Data/CLS-LOC', ('train' if not validation else 'val'), filepath))
             if not validation:
                 try:
                     label = self.cls_list.index(filepath.split('/')[0])
@@ -308,7 +378,7 @@ class DataILSVRC2012(DataReader):
             # read image & random crop 224x224 inside the image
             img, label = self.read_image()
 
-            lb_onehot = np.zeros(len(self.cls_list))
+            lb_onehot = np.zeros(len(self.cls_list), dtype=np.uint8)
             lb_onehot[label] = 1
 
             yield img, lb_onehot
@@ -321,7 +391,9 @@ class DataILSVRC2012(DataReader):
     def validation_set(self, page):
         imgs = []
         labels = []
-        for ridx in range(page * self.batchsize, min((page + 1) * self.batchsize, len(self.valid_list))):
+        start_idx = page * self.batchsize
+        end_idx = min((page + 1) * self.batchsize, len(self.valid_list))
+        for ridx in range(start_idx, end_idx):
             path = self.valid_list[ridx]
             try:
                 img, _ = self.read_image(path, validation=True)
@@ -329,26 +401,48 @@ class DataILSVRC2012(DataReader):
             except Exception as e:
                 logging.warning('validation set error: %s %s' % (path, str(e)))
                 continue
-            lb_onehot = np.zeros(len(self.cls_list))
+            lb_onehot = np.zeros(len(self.cls_list), dtype=np.uint8)
             lb_onehot[label] = 1
 
             imgs.append(img)
             labels.append(lb_onehot)
 
-        return imgs, labels, page * (self.batchsize + 1) < len(self.valid_list)
+        for _ in range(end_idx - start_idx, self.batchsize):
+            imgs.append(np.zeros((224, 224, 3), dtype=np.uint8))
+            labels.append(np.zeros(len(self.cls_list), dtype=np.uint8))
+
+        return imgs, labels, end_idx - start_idx, (page + 1) * self.batchsize < len(self.valid_list)
 
 
 if __name__ == '__main__':
-    data_feeder = DataILSVRC2012('/data/public/ro/dataset/images/imagenet/ILSVRC/2012/object_localization/ILSVRC/', batchsize=32)
+    data_feeder = DataMNIST('/data/public/ro/dataset/images/MNIST/_original/', batchsize=64, gpusize=1)
+    # data_feeder = DataILSVRC2012('/data/public/ro/dataset/images/imagenet/ILSVRC/2012/object_localization/ILSVRC/',
+    #                              batchsize=32, gpusize=1)
+    data_feeder.mode = 'http'
+
+    # validation test
+    print('validation test')
+    val_cnt = 0
+    page = 0
+    while True:
+        images_test, labels_test, num_data, more_batch = data_feeder.validation_set(page)
+        val_cnt += num_data
+        assert len(images_test) == data_feeder.batchsize
+        assert len(labels_test) == data_feeder.batchsize
+        assert num_data <= data_feeder.batchsize
+        assert num_data > 0
+        page += 1
+
+        if not more_batch:
+            break
+
+    print('validation count=%d' % val_cnt)
 
     t = time.time()
     for _ in range(100):
         a = time.time()
         batch = data_feeder.next_batch()
-        print('total elapsed %f' % (time.time() - a))
-        print(data_feeder.time_image)
-        print(data_feeder.time_post_process)
-
+        print('total elapsed %.4f, getting img: %.4f, post process: %.4f' % (time.time() - a, data_feeder.time_image, data_feeder.time_post_process))
         data_feeder.time_image = data_feeder.time_post_process = 0
 
     print()

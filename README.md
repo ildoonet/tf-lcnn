@@ -23,10 +23,12 @@ This also have an implementations multi-gpu training codes for various models, s
 ### MNIST Dataset on Single/Multi-GPU Cluster
 
 | Model           | GPU                 | Accuracy       | Training Time    | Etc                        |
-|:----------------|:--------------------|---------------:|:-----------------| |
-| Lenet           | 1 GPU               | 99.44%         | 21 Min           | |
-| Lenet           | 8 GPU x 1 Machine   | 99.40%         | 2 Min 26 Sec     | |
-| Alexnet         | 1 GPU               |                |                  | Resized 224x224 from 28x28 |
+|:----------------|:--------------------|---------------:|:-----------------|:---------------------------|
+| Lenet           | 1 GPU               | 99.44%         | 21m              | Epoch 53.3                 |
+| Lenet           | 8 GPU x 1 Machine   | 99.40%         | 2m 26s           | Epoch 53.3                 |
+| Alexnet         | 1 GPU               | 99.45%         | 11h 47m          | Epoch 300, Resized 224x224 from 28x28 |
+
+* Performance using Alexnet Architecture might be improved with further tuning of hyper parameters. 
 
 ### Imagenet ILSVRC2012 Classification Task
 
@@ -50,6 +52,8 @@ This also have an implementations multi-gpu training codes for various models, s
 
 [] Distributed Tensorflow : https://www.tensorflow.org/deploy/distributed
 
+[] Distributed Tensorflow Example : https://github.com/tensorflow/models/tree/master/inception
+
 [] https://github.com/hpssjellis/easy-tensorflow-on-cloud9/blob/master/aymericdamien-Examples/examples/alexnet.py
 
 [] https://github.com/sugyan/tensorflow-mnist
@@ -61,3 +65,5 @@ This also have an implementations multi-gpu training codes for various models, s
 [] imgaug : https://github.com/aleju/imgaug
 
 [] Giridhar Pemmasani, "dispy: Distributed and Parallel Computing with/for Python", http://dispy.sourceforge.net, 2016.
+
+[] https://stackoverflow.com/questions/34293714/can-i-measure-the-execution-time-of-individual-operations-with-tensorflow/37774470#37774470

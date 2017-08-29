@@ -77,9 +77,10 @@ def lenet_model(x, class_size, pool_size=(1, 2, 2, 1), conv='lcnn', model_conf=N
                                   pool_size=pool_size, activation_fn=activation_f)
         layer2_flat = flatten_convolution(layer2)
 
-    fc1 = dense_layer(layer2_flat, [1024], activation_fn=activation_f, keep_prob=keep_prob)
-    fc2 = tf.contrib.layers.fully_connected(fc1, class_size,
-                                            activation_fn=None,
-                                            weights_initializer=tf.truncated_normal_initializer(0.0, 0.01),
-                                            biases_initializer=tf.zeros_initializer())
+    with tf.variable_scope('fc'):
+        fc1 = dense_layer(layer2_flat, [1024], activation_fn=activation_f, keep_prob=keep_prob)
+        fc2 = tf.contrib.layers.fully_connected(fc1, class_size,
+                                                activation_fn=None,
+                                                weights_initializer=tf.truncated_normal_initializer(0.0, 0.01),
+                                                biases_initializer=tf.zeros_initializer())
     return fc2

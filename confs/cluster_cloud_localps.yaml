@@ -1,0 +1,14 @@
+ps:
+  - localhost:2220
+#  - localhost:2221
+#  - localhost:2222
+#  - localhost:2223
+
+worker:
+  - localhost:2231
+#  - localhost:2232
+#  - localhost:2233
+#  - localhost:2234
+#  - localhost:2235
+#  - localhost:2236
+#  - localhost:2237

@@ -55,8 +55,6 @@ def alexnet_model(x, class_size, conv='lcnn', model_conf=None, keep_prob=0.5):
     with tf.variable_scope('layer1'):
         layer1 = alex_conv_pool_layer(x, 96, [11, 11], 4, (1, 3, 3, 1), (1, 2, 2, 1), activation_fn=activation_f,
                                       bias_initializer=tf.zeros_initializer(), padding='SAME')
-        # pool_size = (1, 2, 2, 1)
-        # layer1 = lenet_layer(x, 96, [5, 5], pool_size, activation_fn=activation_f)
 
     with tf.variable_scope('layer2'):
         layer2 = alex_conv_pool_layer(layer1, 256, [5, 5], 2, (1, 3, 3, 1), (1, 2, 2, 1), activation_fn=activation_f,
@@ -67,10 +65,11 @@ def alexnet_model(x, class_size, conv='lcnn', model_conf=None, keep_prob=0.5):
         layer3_flat = flatten_convolution(layer3)
 
     # alexnet v1
-    fc1 = dense_layer(layer3_flat, [4096, 4096], activation_fn=activation_f, keep_prob=keep_prob)
-    fc2 = tf.contrib.layers.fully_connected(fc1, class_size,
-                                            activation_fn=None,
-                                            weights_initializer=tf.truncated_normal_initializer(0.0, 0.01),
-                                            biases_initializer=tf.zeros_initializer())
+    with tf.variable_scope('fc'):
+        fc1 = dense_layer(layer3_flat, [4096, 4096], activation_fn=activation_f, keep_prob=keep_prob)
+        fc2 = tf.contrib.layers.fully_connected(fc1, class_size,
+                                                activation_fn=None,
+                                                weights_initializer=tf.truncated_normal_initializer(0.0, 0.01),
+                                                biases_initializer=tf.zeros_initializer())
 
     return fc2
