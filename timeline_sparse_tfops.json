@@ -1,0 +1,2500 @@
+{
+    "traceEvents": [
+        {
+            "ph": "M",
+            "args": {
+                "name": "Allocators"
+            },
+            "pid": 0,
+            "name": "process_name"
+        },
+        {
+            "ph": "M",
+            "args": {
+                "name": "/job:localhost/replica:0/task:0/cpu:0 Compute"
+            },
+            "pid": 1,
+            "name": "process_name"
+        },
+        {
+            "ph": "M",
+            "args": {
+                "name": "/job:localhost/replica:0/task:0/cpu:0 Tensors"
+            },
+            "pid": 2,
+            "name": "process_name"
+        },
+        {
+            "name": "NoOp",
+            "args": {
+                "name": "_SOURCE",
+                "op": "NoOp"
+            },
+            "pid": 1,
+            "ts": 1504946325372871,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 8
+        },
+        {
+            "name": "Const",
+            "args": {
+                "name": "div/y",
+                "op": "Const"
+            },
+            "pid": 1,
+            "ts": 1504946325372887,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 5
+        },
+        {
+            "name": "Const",
+            "args": {
+                "name": "layer1/Pad/paddings",
+                "op": "Const"
+            },
+            "pid": 1,
+            "ts": 1504946325372894,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 3
+        },
+        {
+            "name": "Const",
+            "args": {
+                "name": "layer1/transpose/perm",
+                "op": "Const"
+            },
+            "pid": 1,
+            "ts": 1504946325372898,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 2
+        },
+        {
+            "name": "Const",
+            "args": {
+                "name": "layer1/Reshape/shape",
+                "op": "Const"
+            },
+            "pid": 1,
+            "ts": 1504946325372901,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 3
+        },
+        {
+            "name": "Const",
+            "args": {
+                "name": "layer1/SparseTensor/indices",
+                "op": "Const"
+            },
+            "pid": 1,
+            "ts": 1504946325372905,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 2
+        },
+        {
+            "name": "Const",
+            "args": {
+                "name": "layer1/SparseTensor/values",
+                "op": "Const"
+            },
+            "pid": 1,
+            "ts": 1504946325372908,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 2
+        },
+        {
+            "name": "Const",
+            "args": {
+                "name": "layer1/SparseTensor/dense_shape",
+                "op": "Const"
+            },
+            "pid": 1,
+            "ts": 1504946325372911,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 2
+        },
+        {
+            "name": "Const",
+            "args": {
+                "name": "layer1/transpose_1/sub/y",
+                "op": "Const"
+            },
+            "pid": 1,
+            "ts": 1504946325372914,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 2
+        },
+        {
+            "name": "Const",
+            "args": {
+                "name": "layer1/transpose_1/Range/start",
+                "op": "Const"
+            },
+            "pid": 1,
+            "ts": 1504946325372931,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 2
+        },
+        {
+            "name": "Const",
+            "args": {
+                "name": "layer1/Reshape_1/shape",
+                "op": "Const"
+            },
+            "pid": 1,
+            "ts": 1504946325372934,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 2
+        },
+        {
+            "name": "Const",
+            "args": {
+                "name": "layer1/Const",
+                "op": "Const"
+            },
+            "pid": 1,
+            "ts": 1504946325372937,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 2
+        },
+        {
+            "name": "Const",
+            "args": {
+                "name": "layer2/Reshape/shape",
+                "op": "Const"
+            },
+            "pid": 1,
+            "ts": 1504946325372940,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 2
+        },
+        {
+            "name": "Const",
+            "args": {
+                "name": "layer2/SparseTensor/indices",
+                "op": "Const"
+            },
+            "pid": 1,
+            "ts": 1504946325372943,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 2
+        },
+        {
+            "name": "Const",
+            "args": {
+                "name": "layer2/SparseTensor/values",
+                "op": "Const"
+            },
+            "pid": 1,
+            "ts": 1504946325372946,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 1
+        },
+        {
+            "name": "Const",
+            "args": {
+                "name": "layer2/SparseTensor/dense_shape",
+                "op": "Const"
+            },
+            "pid": 1,
+            "ts": 1504946325372948,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 2
+        },
+        {
+            "name": "Const",
+            "args": {
+                "name": "layer2/Reshape_1/shape",
+                "op": "Const"
+            },
+            "pid": 1,
+            "ts": 1504946325372951,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 2
+        },
+        {
+            "name": "Const",
+            "args": {
+                "name": "layer2/Const",
+                "op": "Const"
+            },
+            "pid": 1,
+            "ts": 1504946325372954,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 2
+        },
+        {
+            "name": "Const",
+            "args": {
+                "name": "layer3/Pad/paddings",
+                "op": "Const"
+            },
+            "pid": 1,
+            "ts": 1504946325372957,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 2
+        },
+        {
+            "name": "Const",
+            "args": {
+                "name": "layer3/Reshape/shape",
+                "op": "Const"
+            },
+            "pid": 1,
+            "ts": 1504946325372961,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 2
+        },
+        {
+            "name": "Const",
+            "args": {
+                "name": "layer3/SparseTensor/indices",
+                "op": "Const"
+            },
+            "pid": 1,
+            "ts": 1504946325372964,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 2
+        },
+        {
+            "name": "Const",
+            "args": {
+                "name": "layer3/SparseTensor/values",
+                "op": "Const"
+            },
+            "pid": 1,
+            "ts": 1504946325372967,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 2
+        },
+        {
+            "name": "Const",
+            "args": {
+                "name": "layer3/SparseTensor/dense_shape",
+                "op": "Const"
+            },
+            "pid": 1,
+            "ts": 1504946325372970,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 2
+        },
+        {
+            "name": "Const",
+            "args": {
+                "name": "layer3/Reshape_1/shape",
+                "op": "Const"
+            },
+            "pid": 1,
+            "ts": 1504946325372973,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 2
+        },
+        {
+            "name": "Const",
+            "args": {
+                "name": "layer3/Const",
+                "op": "Const"
+            },
+            "pid": 1,
+            "ts": 1504946325372976,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 1
+        },
+        {
+            "name": "Const",
+            "args": {
+                "name": "layer4/SparseTensor/indices",
+                "op": "Const"
+            },
+            "pid": 1,
+            "ts": 1504946325372978,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 2
+        },
+        {
+            "name": "Const",
+            "args": {
+                "name": "layer4/SparseTensor/values",
+                "op": "Const"
+            },
+            "pid": 1,
+            "ts": 1504946325372981,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 2
+        },
+        {
+            "name": "Const",
+            "args": {
+                "name": "layer4/SparseTensor/dense_shape",
+                "op": "Const"
+            },
+            "pid": 1,
+            "ts": 1504946325372984,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 2
+        },
+        {
+            "name": "Const",
+            "args": {
+                "name": "layer4/Reshape_1/shape",
+                "op": "Const"
+            },
+            "pid": 1,
+            "ts": 1504946325372987,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 1
+        },
+        {
+            "name": "Const",
+            "args": {
+                "name": "layer4/Const",
+                "op": "Const"
+            },
+            "pid": 1,
+            "ts": 1504946325372989,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 2
+        },
+        {
+            "name": "Const",
+            "args": {
+                "name": "layer5/SparseTensor/indices",
+                "op": "Const"
+            },
+            "pid": 1,
+            "ts": 1504946325372992,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 2
+        },
+        {
+            "name": "Const",
+            "args": {
+                "name": "layer5/SparseTensor/values",
+                "op": "Const"
+            },
+            "pid": 1,
+            "ts": 1504946325372995,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 3
+        },
+        {
+            "name": "Const",
+            "args": {
+                "name": "layer5/Const",
+                "op": "Const"
+            },
+            "pid": 1,
+            "ts": 1504946325372999,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 2
+        },
+        {
+            "name": "Const",
+            "args": {
+                "name": "layer6/Pad/paddings",
+                "op": "Const"
+            },
+            "pid": 1,
+            "ts": 1504946325373002,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 2
+        },
+        {
+            "name": "Const",
+            "args": {
+                "name": "layer6/Reshape/shape",
+                "op": "Const"
+            },
+            "pid": 1,
+            "ts": 1504946325373005,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 2
+        },
+        {
+            "name": "Const",
+            "args": {
+                "name": "layer6/SparseTensor/indices",
+                "op": "Const"
+            },
+            "pid": 1,
+            "ts": 1504946325373008,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 2
+        },
+        {
+            "name": "Const",
+            "args": {
+                "name": "layer6/SparseTensor/values",
+                "op": "Const"
+            },
+            "pid": 1,
+            "ts": 1504946325373011,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 2
+        },
+        {
+            "name": "Const",
+            "args": {
+                "name": "layer6/SparseTensor/dense_shape",
+                "op": "Const"
+            },
+            "pid": 1,
+            "ts": 1504946325373014,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 2
+        },
+        {
+            "name": "Const",
+            "args": {
+                "name": "layer6/Reshape_1/shape",
+                "op": "Const"
+            },
+            "pid": 1,
+            "ts": 1504946325373017,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 2
+        },
+        {
+            "name": "Const",
+            "args": {
+                "name": "layer6/Const",
+                "op": "Const"
+            },
+            "pid": 1,
+            "ts": 1504946325373020,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 2
+        },
+        {
+            "name": "Const",
+            "args": {
+                "name": "layer7/Reshape/shape",
+                "op": "Const"
+            },
+            "pid": 1,
+            "ts": 1504946325373022,
+            "cat": "Op",
+            "tid": 1,
+            "ph": "X",
+            "dur": 2
+        },
+        {
+            "name": "Const",
+            "args": {
+                "name": "layer7/SparseTensor/indices",
+                "op": "Const"
+            },
+            "pid": 1,
+            "ts": 1504946325373026,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 1
+        },
+        {
+            "name": "Const",
+            "args": {
+                "name": "layer7/SparseTensor/values",
+                "op": "Const"
+            },
+            "pid": 1,
+            "ts": 1504946325373028,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 2
+        },
+        {
+            "name": "Const",
+            "args": {
+                "name": "layer7/SparseTensor/dense_shape",
+                "op": "Const"
+            },
+            "pid": 1,
+            "ts": 1504946325373031,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 2
+        },
+        {
+            "name": "Const",
+            "args": {
+                "name": "layer7/Const",
+                "op": "Const"
+            },
+            "pid": 1,
+            "ts": 1504946325373034,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 2
+        },
+        {
+            "name": "Const",
+            "args": {
+                "name": "layer8/Reshape/shape",
+                "op": "Const"
+            },
+            "pid": 1,
+            "ts": 1504946325373037,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 2
+        },
+        {
+            "name": "VariableV2",
+            "args": {
+                "name": "layer8/fully_connected/biases",
+                "op": "VariableV2"
+            },
+            "pid": 1,
+            "ts": 1504946325373041,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 7
+        },
+        {
+            "name": "Identity",
+            "args": {
+                "input0": "layer8/fully_connected/biases",
+                "name": "layer8/fully_connected/biases/read",
+                "op": "Identity"
+            },
+            "pid": 1,
+            "ts": 1504946325373050,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 2
+        },
+        {
+            "name": "VariableV2",
+            "args": {
+                "name": "layer8/fully_connected/weights",
+                "op": "VariableV2"
+            },
+            "pid": 1,
+            "ts": 1504946325373054,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 5
+        },
+        {
+            "name": "Identity",
+            "args": {
+                "input0": "layer8/fully_connected/weights",
+                "name": "layer8/fully_connected/weights/read",
+                "op": "Identity"
+            },
+            "pid": 1,
+            "ts": 1504946325373060,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 2
+        },
+        {
+            "name": "VariableV2",
+            "args": {
+                "name": "layer7/pool_conv/weights",
+                "op": "VariableV2"
+            },
+            "pid": 1,
+            "ts": 1504946325373065,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 5
+        },
+        {
+            "name": "Identity",
+            "args": {
+                "input0": "layer7/pool_conv/weights",
+                "name": "layer7/pool_conv/weights/read",
+                "op": "Identity"
+            },
+            "pid": 1,
+            "ts": 1504946325373071,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 2
+        },
+        {
+            "name": "VariableV2",
+            "args": {
+                "name": "layer6/pool_conv/weights",
+                "op": "VariableV2"
+            },
+            "pid": 1,
+            "ts": 1504946325373075,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 4
+        },
+        {
+            "name": "Identity",
+            "args": {
+                "input0": "layer6/pool_conv/weights",
+                "name": "layer6/pool_conv/weights/read",
+                "op": "Identity"
+            },
+            "pid": 1,
+            "ts": 1504946325373080,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 2
+        },
+        {
+            "name": "VariableV2",
+            "args": {
+                "name": "layer5/pool_conv/weights",
+                "op": "VariableV2"
+            },
+            "pid": 1,
+            "ts": 1504946325373083,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 4
+        },
+        {
+            "name": "Identity",
+            "args": {
+                "input0": "layer5/pool_conv/weights",
+                "name": "layer5/pool_conv/weights/read",
+                "op": "Identity"
+            },
+            "pid": 1,
+            "ts": 1504946325373088,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 3
+        },
+        {
+            "name": "VariableV2",
+            "args": {
+                "name": "layer4/pool_conv/weights",
+                "op": "VariableV2"
+            },
+            "pid": 1,
+            "ts": 1504946325373092,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 4
+        },
+        {
+            "name": "Identity",
+            "args": {
+                "input0": "layer4/pool_conv/weights",
+                "name": "layer4/pool_conv/weights/read",
+                "op": "Identity"
+            },
+            "pid": 1,
+            "ts": 1504946325373097,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 3
+        },
+        {
+            "name": "VariableV2",
+            "args": {
+                "name": "layer3/pool_conv/weights",
+                "op": "VariableV2"
+            },
+            "pid": 1,
+            "ts": 1504946325373101,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 4
+        },
+        {
+            "name": "Identity",
+            "args": {
+                "input0": "layer3/pool_conv/weights",
+                "name": "layer3/pool_conv/weights/read",
+                "op": "Identity"
+            },
+            "pid": 1,
+            "ts": 1504946325373106,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 2
+        },
+        {
+            "name": "VariableV2",
+            "args": {
+                "name": "layer2/pool_conv/weights",
+                "op": "VariableV2"
+            },
+            "pid": 1,
+            "ts": 1504946325373109,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 4
+        },
+        {
+            "name": "Identity",
+            "args": {
+                "input0": "layer2/pool_conv/weights",
+                "name": "layer2/pool_conv/weights/read",
+                "op": "Identity"
+            },
+            "pid": 1,
+            "ts": 1504946325373114,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 2
+        },
+        {
+            "name": "VariableV2",
+            "args": {
+                "name": "layer1/pool_conv/weights",
+                "op": "VariableV2"
+            },
+            "pid": 1,
+            "ts": 1504946325373118,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 4
+        },
+        {
+            "name": "Identity",
+            "args": {
+                "input0": "layer1/pool_conv/weights",
+                "name": "layer1/pool_conv/weights/read",
+                "op": "Identity"
+            },
+            "pid": 1,
+            "ts": 1504946325373123,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 2
+        },
+        {
+            "name": "_Arg",
+            "args": {
+                "name": "_arg_Placeholder_0_0",
+                "op": "_Arg"
+            },
+            "pid": 1,
+            "ts": 1504946325373126,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 3
+        },
+        {
+            "name": "RealDiv",
+            "args": {
+                "input0": "_arg_Placeholder_0_0",
+                "input1": "div/y",
+                "name": "div",
+                "op": "RealDiv"
+            },
+            "pid": 1,
+            "ts": 1504946325373131,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 32
+        },
+        {
+            "name": "Pad",
+            "args": {
+                "input0": "div",
+                "input1": "layer1/Pad/paddings",
+                "name": "layer1/Pad",
+                "op": "Pad"
+            },
+            "pid": 1,
+            "ts": 1504946325373168,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 2477
+        },
+        {
+            "name": "Conv2D",
+            "args": {
+                "input0": "layer1/Pad",
+                "input1": "layer1/pool_conv/weights/read",
+                "name": "layer1/pool_conv/convolution",
+                "op": "Conv2D"
+            },
+            "pid": 1,
+            "ts": 1504946325375648,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 314
+        },
+        {
+            "name": "ExtractImagePatches",
+            "args": {
+                "input0": "layer1/pool_conv/convolution",
+                "name": "layer1/ExtractImagePatches",
+                "op": "ExtractImagePatches"
+            },
+            "pid": 1,
+            "ts": 1504946325375965,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 7557
+        },
+        {
+            "name": "Transpose",
+            "args": {
+                "input0": "layer1/ExtractImagePatches",
+                "input1": "layer1/transpose/perm",
+                "name": "layer1/transpose",
+                "op": "Transpose"
+            },
+            "pid": 1,
+            "ts": 1504946325383526,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 37513
+        },
+        {
+            "name": "Reshape",
+            "args": {
+                "input0": "layer1/transpose",
+                "input1": "layer1/Reshape/shape",
+                "name": "layer1/Reshape",
+                "op": "Reshape"
+            },
+            "pid": 1,
+            "ts": 1504946325421050,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 7
+        },
+        {
+            "name": "SparseTensorDenseMatMul",
+            "args": {
+                "input2": "layer1/SparseTensor/dense_shape",
+                "input3": "layer1/Reshape",
+                "input0": "layer1/SparseTensor/indices",
+                "input1": "layer1/SparseTensor/values",
+                "name": "layer1/SparseTensorDenseMatMul/SparseTensorDenseMatMul",
+                "op": "SparseTensorDenseMatMul"
+            },
+            "pid": 1,
+            "ts": 1504946325421059,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 2446
+        },
+        {
+            "name": "Rank",
+            "args": {
+                "input0": "layer1/SparseTensorDenseMatMul/SparseTensorDenseMatMul",
+                "name": "layer1/transpose_1/Rank",
+                "op": "Rank"
+            },
+            "pid": 1,
+            "ts": 1504946325423514,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 7
+        },
+        {
+            "name": "Range",
+            "args": {
+                "input2": "layer1/transpose_1/Range/delta",
+                "input0": "layer1/transpose_1/Range/start",
+                "input1": "layer1/transpose_1/Rank",
+                "name": "layer1/transpose_1/Range",
+                "op": "Range"
+            },
+            "pid": 1,
+            "ts": 1504946325423525,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 4
+        },
+        {
+            "name": "Sub",
+            "args": {
+                "input0": "layer1/transpose_1/Rank",
+                "input1": "layer1/transpose_1/sub/y",
+                "name": "layer1/transpose_1/sub",
+                "op": "Sub"
+            },
+            "pid": 1,
+            "ts": 1504946325423532,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 5
+        },
+        {
+            "name": "Sub",
+            "args": {
+                "input0": "layer1/transpose_1/sub",
+                "input1": "layer1/transpose_1/Range",
+                "name": "layer1/transpose_1/sub_1",
+                "op": "Sub"
+            },
+            "pid": 1,
+            "ts": 1504946325423539,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 4
+        },
+        {
+            "name": "Transpose",
+            "args": {
+                "input0": "layer1/SparseTensorDenseMatMul/SparseTensorDenseMatMul",
+                "input1": "layer1/transpose_1/sub_1",
+                "name": "layer1/transpose_1",
+                "op": "Transpose"
+            },
+            "pid": 1,
+            "ts": 1504946325423544,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 1837
+        },
+        {
+            "name": "Reshape",
+            "args": {
+                "input0": "layer1/transpose_1",
+                "input1": "layer1/Reshape_1/shape",
+                "name": "layer1/Reshape_1",
+                "op": "Reshape"
+            },
+            "pid": 1,
+            "ts": 1504946325425386,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 3
+        },
+        {
+            "name": "BiasAdd",
+            "args": {
+                "input0": "layer1/Reshape_1",
+                "input1": "layer1/Const",
+                "name": "layer1/BiasAdd",
+                "op": "BiasAdd"
+            },
+            "pid": 1,
+            "ts": 1504946325425391,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 151
+        },
+        {
+            "name": "Relu",
+            "args": {
+                "input0": "layer1/BiasAdd",
+                "name": "layer1/Relu",
+                "op": "Relu"
+            },
+            "pid": 1,
+            "ts": 1504946325425544,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 27
+        },
+        {
+            "name": "MaxPool",
+            "args": {
+                "input0": "layer1/Relu",
+                "name": "layer1/MaxPool",
+                "op": "MaxPool"
+            },
+            "pid": 1,
+            "ts": 1504946325425573,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 215
+        },
+        {
+            "name": "Pad",
+            "args": {
+                "input0": "layer1/MaxPool",
+                "input1": "layer2/Pad/paddings",
+                "name": "layer2/Pad",
+                "op": "Pad"
+            },
+            "pid": 1,
+            "ts": 1504946325425794,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 597
+        },
+        {
+            "name": "Conv2D",
+            "args": {
+                "input0": "layer2/Pad",
+                "input1": "layer2/pool_conv/weights/read",
+                "name": "layer2/pool_conv/convolution",
+                "op": "Conv2D"
+            },
+            "pid": 1,
+            "ts": 1504946325426395,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 208
+        },
+        {
+            "name": "ExtractImagePatches",
+            "args": {
+                "input0": "layer2/pool_conv/convolution",
+                "name": "layer2/ExtractImagePatches",
+                "op": "ExtractImagePatches"
+            },
+            "pid": 1,
+            "ts": 1504946325426606,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 3131
+        },
+        {
+            "name": "Transpose",
+            "args": {
+                "input0": "layer2/ExtractImagePatches",
+                "input1": "layer2/transpose/perm",
+                "name": "layer2/transpose",
+                "op": "Transpose"
+            },
+            "pid": 1,
+            "ts": 1504946325429739,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 22812
+        },
+        {
+            "name": "Reshape",
+            "args": {
+                "input0": "layer2/transpose",
+                "input1": "layer2/Reshape/shape",
+                "name": "layer2/Reshape",
+                "op": "Reshape"
+            },
+            "pid": 1,
+            "ts": 1504946325452559,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 7
+        },
+        {
+            "name": "SparseTensorDenseMatMul",
+            "args": {
+                "input2": "layer2/SparseTensor/dense_shape",
+                "input3": "layer2/Reshape",
+                "input0": "layer2/SparseTensor/indices",
+                "input1": "layer2/SparseTensor/values",
+                "name": "layer2/SparseTensorDenseMatMul/SparseTensorDenseMatMul",
+                "op": "SparseTensorDenseMatMul"
+            },
+            "pid": 1,
+            "ts": 1504946325452568,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 893
+        },
+        {
+            "name": "Rank",
+            "args": {
+                "input0": "layer2/SparseTensorDenseMatMul/SparseTensorDenseMatMul",
+                "name": "layer2/transpose_1/Rank",
+                "op": "Rank"
+            },
+            "pid": 1,
+            "ts": 1504946325453466,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 4
+        },
+        {
+            "name": "Range",
+            "args": {
+                "input2": "layer2/transpose_1/Range/delta",
+                "input0": "layer2/transpose_1/Range/start",
+                "input1": "layer2/transpose_1/Rank",
+                "name": "layer2/transpose_1/Range",
+                "op": "Range"
+            },
+            "pid": 1,
+            "ts": 1504946325453475,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 3
+        },
+        {
+            "name": "Sub",
+            "args": {
+                "input0": "layer2/transpose_1/Rank",
+                "input1": "layer2/transpose_1/sub/y",
+                "name": "layer2/transpose_1/sub",
+                "op": "Sub"
+            },
+            "pid": 1,
+            "ts": 1504946325453481,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 5
+        },
+        {
+            "name": "Sub",
+            "args": {
+                "input0": "layer2/transpose_1/sub",
+                "input1": "layer2/transpose_1/Range",
+                "name": "layer2/transpose_1/sub_1",
+                "op": "Sub"
+            },
+            "pid": 1,
+            "ts": 1504946325453488,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 4
+        },
+        {
+            "name": "Transpose",
+            "args": {
+                "input0": "layer2/SparseTensorDenseMatMul/SparseTensorDenseMatMul",
+                "input1": "layer2/transpose_1/sub_1",
+                "name": "layer2/transpose_1",
+                "op": "Transpose"
+            },
+            "pid": 1,
+            "ts": 1504946325453493,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 1385
+        },
+        {
+            "name": "Reshape",
+            "args": {
+                "input0": "layer2/transpose_1",
+                "input1": "layer2/Reshape_1/shape",
+                "name": "layer2/Reshape_1",
+                "op": "Reshape"
+            },
+            "pid": 1,
+            "ts": 1504946325454881,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 3
+        },
+        {
+            "name": "BiasAdd",
+            "args": {
+                "input0": "layer2/Reshape_1",
+                "input1": "layer2/Const",
+                "name": "layer2/BiasAdd",
+                "op": "BiasAdd"
+            },
+            "pid": 1,
+            "ts": 1504946325454885,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 108
+        },
+        {
+            "name": "Relu",
+            "args": {
+                "input0": "layer2/BiasAdd",
+                "name": "layer2/Relu",
+                "op": "Relu"
+            },
+            "pid": 1,
+            "ts": 1504946325454994,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 21
+        },
+        {
+            "name": "MaxPool",
+            "args": {
+                "input0": "layer2/Relu",
+                "name": "layer2/MaxPool",
+                "op": "MaxPool"
+            },
+            "pid": 1,
+            "ts": 1504946325455016,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 94
+        },
+        {
+            "name": "Pad",
+            "args": {
+                "input0": "layer2/MaxPool",
+                "input1": "layer3/Pad/paddings",
+                "name": "layer3/Pad",
+                "op": "Pad"
+            },
+            "pid": 1,
+            "ts": 1504946325455112,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 528
+        },
+        {
+            "name": "Conv2D",
+            "args": {
+                "input0": "layer3/Pad",
+                "input1": "layer3/pool_conv/weights/read",
+                "name": "layer3/pool_conv/convolution",
+                "op": "Conv2D"
+            },
+            "pid": 1,
+            "ts": 1504946325455646,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 171
+        },
+        {
+            "name": "ExtractImagePatches",
+            "args": {
+                "input0": "layer3/pool_conv/convolution",
+                "name": "layer3/ExtractImagePatches",
+                "op": "ExtractImagePatches"
+            },
+            "pid": 1,
+            "ts": 1504946325455819,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 287
+        },
+        {
+            "name": "Transpose",
+            "args": {
+                "input0": "layer3/ExtractImagePatches",
+                "input1": "layer3/transpose/perm",
+                "name": "layer3/transpose",
+                "op": "Transpose"
+            },
+            "pid": 1,
+            "ts": 1504946325456110,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 2765
+        },
+        {
+            "name": "Reshape",
+            "args": {
+                "input0": "layer3/transpose",
+                "input1": "layer3/Reshape/shape",
+                "name": "layer3/Reshape",
+                "op": "Reshape"
+            },
+            "pid": 1,
+            "ts": 1504946325458887,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 7
+        },
+        {
+            "name": "SparseTensorDenseMatMul",
+            "args": {
+                "input2": "layer3/SparseTensor/dense_shape",
+                "input3": "layer3/Reshape",
+                "input0": "layer3/SparseTensor/indices",
+                "input1": "layer3/SparseTensor/values",
+                "name": "layer3/SparseTensorDenseMatMul/SparseTensorDenseMatMul",
+                "op": "SparseTensorDenseMatMul"
+            },
+            "pid": 1,
+            "ts": 1504946325458896,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 86
+        },
+        {
+            "name": "Rank",
+            "args": {
+                "input0": "layer3/SparseTensorDenseMatMul/SparseTensorDenseMatMul",
+                "name": "layer3/transpose_1/Rank",
+                "op": "Rank"
+            },
+            "pid": 1,
+            "ts": 1504946325458986,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 4
+        },
+        {
+            "name": "Range",
+            "args": {
+                "input2": "layer3/transpose_1/Range/delta",
+                "input0": "layer3/transpose_1/Range/start",
+                "input1": "layer3/transpose_1/Rank",
+                "name": "layer3/transpose_1/Range",
+                "op": "Range"
+            },
+            "pid": 1,
+            "ts": 1504946325458996,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 3
+        },
+        {
+            "name": "Sub",
+            "args": {
+                "input0": "layer3/transpose_1/Rank",
+                "input1": "layer3/transpose_1/sub/y",
+                "name": "layer3/transpose_1/sub",
+                "op": "Sub"
+            },
+            "pid": 1,
+            "ts": 1504946325459002,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 6
+        },
+        {
+            "name": "Sub",
+            "args": {
+                "input0": "layer3/transpose_1/sub",
+                "input1": "layer3/transpose_1/Range",
+                "name": "layer3/transpose_1/sub_1",
+                "op": "Sub"
+            },
+            "pid": 1,
+            "ts": 1504946325459009,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 5
+        },
+        {
+            "name": "Transpose",
+            "args": {
+                "input0": "layer3/SparseTensorDenseMatMul/SparseTensorDenseMatMul",
+                "input1": "layer3/transpose_1/sub_1",
+                "name": "layer3/transpose_1",
+                "op": "Transpose"
+            },
+            "pid": 1,
+            "ts": 1504946325459016,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 711
+        },
+        {
+            "name": "Reshape",
+            "args": {
+                "input0": "layer3/transpose_1",
+                "input1": "layer3/Reshape_1/shape",
+                "name": "layer3/Reshape_1",
+                "op": "Reshape"
+            },
+            "pid": 1,
+            "ts": 1504946325459730,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 3
+        },
+        {
+            "name": "BiasAdd",
+            "args": {
+                "input0": "layer3/Reshape_1",
+                "input1": "layer3/Const",
+                "name": "layer3/BiasAdd",
+                "op": "BiasAdd"
+            },
+            "pid": 1,
+            "ts": 1504946325459734,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 64
+        },
+        {
+            "name": "Relu",
+            "args": {
+                "input0": "layer3/BiasAdd",
+                "name": "layer3/Relu",
+                "op": "Relu"
+            },
+            "pid": 1,
+            "ts": 1504946325459799,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 13
+        },
+        {
+            "name": "Pad",
+            "args": {
+                "input0": "layer3/Relu",
+                "input1": "layer4/Pad/paddings",
+                "name": "layer4/Pad",
+                "op": "Pad"
+            },
+            "pid": 1,
+            "ts": 1504946325459813,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 900
+        },
+        {
+            "name": "Conv2D",
+            "args": {
+                "input0": "layer4/Pad",
+                "input1": "layer4/pool_conv/weights/read",
+                "name": "layer4/pool_conv/convolution",
+                "op": "Conv2D"
+            },
+            "pid": 1,
+            "ts": 1504946325460716,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 342
+        },
+        {
+            "name": "ExtractImagePatches",
+            "args": {
+                "input0": "layer4/pool_conv/convolution",
+                "name": "layer4/ExtractImagePatches",
+                "op": "ExtractImagePatches"
+            },
+            "pid": 1,
+            "ts": 1504946325461060,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 387
+        },
+        {
+            "name": "Transpose",
+            "args": {
+                "input0": "layer4/ExtractImagePatches",
+                "input1": "layer4/transpose/perm",
+                "name": "layer4/transpose",
+                "op": "Transpose"
+            },
+            "pid": 1,
+            "ts": 1504946325461452,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 2034
+        },
+        {
+            "name": "Reshape",
+            "args": {
+                "input0": "layer4/transpose",
+                "input1": "layer4/Reshape/shape",
+                "name": "layer4/Reshape",
+                "op": "Reshape"
+            },
+            "pid": 1,
+            "ts": 1504946325463507,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 11
+        },
+        {
+            "name": "SparseTensorDenseMatMul",
+            "args": {
+                "input2": "layer4/SparseTensor/dense_shape",
+                "input3": "layer4/Reshape",
+                "input0": "layer4/SparseTensor/indices",
+                "input1": "layer4/SparseTensor/values",
+                "name": "layer4/SparseTensorDenseMatMul/SparseTensorDenseMatMul",
+                "op": "SparseTensorDenseMatMul"
+            },
+            "pid": 1,
+            "ts": 1504946325463524,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 150
+        },
+        {
+            "name": "Rank",
+            "args": {
+                "input0": "layer4/SparseTensorDenseMatMul/SparseTensorDenseMatMul",
+                "name": "layer4/transpose_1/Rank",
+                "op": "Rank"
+            },
+            "pid": 1,
+            "ts": 1504946325463683,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 7
+        },
+        {
+            "name": "Range",
+            "args": {
+                "input2": "layer4/transpose_1/Range/delta",
+                "input0": "layer4/transpose_1/Range/start",
+                "input1": "layer4/transpose_1/Rank",
+                "name": "layer4/transpose_1/Range",
+                "op": "Range"
+            },
+            "pid": 1,
+            "ts": 1504946325463701,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 6
+        },
+        {
+            "name": "Sub",
+            "args": {
+                "input0": "layer4/transpose_1/Rank",
+                "input1": "layer4/transpose_1/sub/y",
+                "name": "layer4/transpose_1/sub",
+                "op": "Sub"
+            },
+            "pid": 1,
+            "ts": 1504946325463711,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 8
+        },
+        {
+            "name": "Sub",
+            "args": {
+                "input0": "layer4/transpose_1/sub",
+                "input1": "layer4/transpose_1/Range",
+                "name": "layer4/transpose_1/sub_1",
+                "op": "Sub"
+            },
+            "pid": 1,
+            "ts": 1504946325463721,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 6
+        },
+        {
+            "name": "Transpose",
+            "args": {
+                "input0": "layer4/SparseTensorDenseMatMul/SparseTensorDenseMatMul",
+                "input1": "layer4/transpose_1/sub_1",
+                "name": "layer4/transpose_1",
+                "op": "Transpose"
+            },
+            "pid": 1,
+            "ts": 1504946325463729,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 571
+        },
+        {
+            "name": "Reshape",
+            "args": {
+                "input0": "layer4/transpose_1",
+                "input1": "layer4/Reshape_1/shape",
+                "name": "layer4/Reshape_1",
+                "op": "Reshape"
+            },
+            "pid": 1,
+            "ts": 1504946325464305,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 4
+        },
+        {
+            "name": "BiasAdd",
+            "args": {
+                "input0": "layer4/Reshape_1",
+                "input1": "layer4/Const",
+                "name": "layer4/BiasAdd",
+                "op": "BiasAdd"
+            },
+            "pid": 1,
+            "ts": 1504946325464310,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 45
+        },
+        {
+            "name": "Relu",
+            "args": {
+                "input0": "layer4/BiasAdd",
+                "name": "layer4/Relu",
+                "op": "Relu"
+            },
+            "pid": 1,
+            "ts": 1504946325464356,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 9
+        },
+        {
+            "name": "Pad",
+            "args": {
+                "input0": "layer4/Relu",
+                "input1": "layer5/Pad/paddings",
+                "name": "layer5/Pad",
+                "op": "Pad"
+            },
+            "pid": 1,
+            "ts": 1504946325464366,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 582
+        },
+        {
+            "name": "Conv2D",
+            "args": {
+                "input0": "layer5/Pad",
+                "input1": "layer5/pool_conv/weights/read",
+                "name": "layer5/pool_conv/convolution",
+                "op": "Conv2D"
+            },
+            "pid": 1,
+            "ts": 1504946325464951,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 215
+        },
+        {
+            "name": "ExtractImagePatches",
+            "args": {
+                "input0": "layer5/pool_conv/convolution",
+                "name": "layer5/ExtractImagePatches",
+                "op": "ExtractImagePatches"
+            },
+            "pid": 1,
+            "ts": 1504946325465168,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 319
+        },
+        {
+            "name": "Transpose",
+            "args": {
+                "input0": "layer5/ExtractImagePatches",
+                "input1": "layer5/transpose/perm",
+                "name": "layer5/transpose",
+                "op": "Transpose"
+            },
+            "pid": 1,
+            "ts": 1504946325465491,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 1807
+        },
+        {
+            "name": "Reshape",
+            "args": {
+                "input0": "layer5/transpose",
+                "input1": "layer5/Reshape/shape",
+                "name": "layer5/Reshape",
+                "op": "Reshape"
+            },
+            "pid": 1,
+            "ts": 1504946325467302,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 3
+        },
+        {
+            "name": "SparseTensorDenseMatMul",
+            "args": {
+                "input2": "layer5/SparseTensor/dense_shape",
+                "input3": "layer5/Reshape",
+                "input0": "layer5/SparseTensor/indices",
+                "input1": "layer5/SparseTensor/values",
+                "name": "layer5/SparseTensorDenseMatMul/SparseTensorDenseMatMul",
+                "op": "SparseTensorDenseMatMul"
+            },
+            "pid": 1,
+            "ts": 1504946325467307,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 84
+        },
+        {
+            "name": "Rank",
+            "args": {
+                "input0": "layer5/SparseTensorDenseMatMul/SparseTensorDenseMatMul",
+                "name": "layer5/transpose_1/Rank",
+                "op": "Rank"
+            },
+            "pid": 1,
+            "ts": 1504946325467394,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 2
+        },
+        {
+            "name": "Range",
+            "args": {
+                "input2": "layer5/transpose_1/Range/delta",
+                "input0": "layer5/transpose_1/Range/start",
+                "input1": "layer5/transpose_1/Rank",
+                "name": "layer5/transpose_1/Range",
+                "op": "Range"
+            },
+            "pid": 1,
+            "ts": 1504946325467399,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 3
+        },
+        {
+            "name": "Sub",
+            "args": {
+                "input0": "layer5/transpose_1/Rank",
+                "input1": "layer5/transpose_1/sub/y",
+                "name": "layer5/transpose_1/sub",
+                "op": "Sub"
+            },
+            "pid": 1,
+            "ts": 1504946325467405,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 3
+        },
+        {
+            "name": "Sub",
+            "args": {
+                "input0": "layer5/transpose_1/sub",
+                "input1": "layer5/transpose_1/Range",
+                "name": "layer5/transpose_1/sub_1",
+                "op": "Sub"
+            },
+            "pid": 1,
+            "ts": 1504946325467409,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 3
+        },
+        {
+            "name": "Transpose",
+            "args": {
+                "input0": "layer5/SparseTensorDenseMatMul/SparseTensorDenseMatMul",
+                "input1": "layer5/transpose_1/sub_1",
+                "name": "layer5/transpose_1",
+                "op": "Transpose"
+            },
+            "pid": 1,
+            "ts": 1504946325467414,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 447
+        },
+        {
+            "name": "Reshape",
+            "args": {
+                "input0": "layer5/transpose_1",
+                "input1": "layer5/Reshape_1/shape",
+                "name": "layer5/Reshape_1",
+                "op": "Reshape"
+            },
+            "pid": 1,
+            "ts": 1504946325467863,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 3
+        },
+        {
+            "name": "BiasAdd",
+            "args": {
+                "input0": "layer5/Reshape_1",
+                "input1": "layer5/Const",
+                "name": "layer5/BiasAdd",
+                "op": "BiasAdd"
+            },
+            "pid": 1,
+            "ts": 1504946325467867,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 40
+        },
+        {
+            "name": "Relu",
+            "args": {
+                "input0": "layer5/BiasAdd",
+                "name": "layer5/Relu",
+                "op": "Relu"
+            },
+            "pid": 1,
+            "ts": 1504946325467908,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 8
+        },
+        {
+            "name": "MaxPool",
+            "args": {
+                "input0": "layer5/Relu",
+                "name": "layer5/MaxPool",
+                "op": "MaxPool"
+            },
+            "pid": 1,
+            "ts": 1504946325467918,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 45
+        },
+        {
+            "name": "Pad",
+            "args": {
+                "input0": "layer5/MaxPool",
+                "input1": "layer6/Pad/paddings",
+                "name": "layer6/Pad",
+                "op": "Pad"
+            },
+            "pid": 1,
+            "ts": 1504946325467964,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 3
+        },
+        {
+            "name": "Conv2D",
+            "args": {
+                "input0": "layer6/Pad",
+                "input1": "layer6/pool_conv/weights/read",
+                "name": "layer6/pool_conv/convolution",
+                "op": "Conv2D"
+            },
+            "pid": 1,
+            "ts": 1504946325467968,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 621
+        },
+        {
+            "name": "ExtractImagePatches",
+            "args": {
+                "input0": "layer6/pool_conv/convolution",
+                "name": "layer6/ExtractImagePatches",
+                "op": "ExtractImagePatches"
+            },
+            "pid": 1,
+            "ts": 1504946325468591,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 127
+        },
+        {
+            "name": "Transpose",
+            "args": {
+                "input0": "layer6/ExtractImagePatches",
+                "input1": "layer6/transpose/perm",
+                "name": "layer6/transpose",
+                "op": "Transpose"
+            },
+            "pid": 1,
+            "ts": 1504946325468719,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 3
+        },
+        {
+            "name": "Reshape",
+            "args": {
+                "input0": "layer6/transpose",
+                "input1": "layer6/Reshape/shape",
+                "name": "layer6/Reshape",
+                "op": "Reshape"
+            },
+            "pid": 1,
+            "ts": 1504946325468724,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 2
+        },
+        {
+            "name": "SparseTensorDenseMatMul",
+            "args": {
+                "input2": "layer6/SparseTensor/dense_shape",
+                "input3": "layer6/Reshape",
+                "input0": "layer6/SparseTensor/indices",
+                "input1": "layer6/SparseTensor/values",
+                "name": "layer6/SparseTensorDenseMatMul/SparseTensorDenseMatMul",
+                "op": "SparseTensorDenseMatMul"
+            },
+            "pid": 1,
+            "ts": 1504946325468728,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 376
+        },
+        {
+            "name": "Rank",
+            "args": {
+                "input0": "layer6/SparseTensorDenseMatMul/SparseTensorDenseMatMul",
+                "name": "layer6/transpose_1/Rank",
+                "op": "Rank"
+            },
+            "pid": 1,
+            "ts": 1504946325469107,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 3
+        },
+        {
+            "name": "Range",
+            "args": {
+                "input2": "layer6/transpose_1/Range/delta",
+                "input0": "layer6/transpose_1/Range/start",
+                "input1": "layer6/transpose_1/Rank",
+                "name": "layer6/transpose_1/Range",
+                "op": "Range"
+            },
+            "pid": 1,
+            "ts": 1504946325469112,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 3
+        },
+        {
+            "name": "Sub",
+            "args": {
+                "input0": "layer6/transpose_1/Rank",
+                "input1": "layer6/transpose_1/sub/y",
+                "name": "layer6/transpose_1/sub",
+                "op": "Sub"
+            },
+            "pid": 1,
+            "ts": 1504946325469117,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 2
+        },
+        {
+            "name": "Sub",
+            "args": {
+                "input0": "layer6/transpose_1/sub",
+                "input1": "layer6/transpose_1/Range",
+                "name": "layer6/transpose_1/sub_1",
+                "op": "Sub"
+            },
+            "pid": 1,
+            "ts": 1504946325469120,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 3
+        },
+        {
+            "name": "Transpose",
+            "args": {
+                "input0": "layer6/SparseTensorDenseMatMul/SparseTensorDenseMatMul",
+                "input1": "layer6/transpose_1/sub_1",
+                "name": "layer6/transpose_1",
+                "op": "Transpose"
+            },
+            "pid": 1,
+            "ts": 1504946325469125,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 2
+        },
+        {
+            "name": "Reshape",
+            "args": {
+                "input0": "layer6/transpose_1",
+                "input1": "layer6/Reshape_1/shape",
+                "name": "layer6/Reshape_1",
+                "op": "Reshape"
+            },
+            "pid": 1,
+            "ts": 1504946325469129,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 2
+        },
+        {
+            "name": "BiasAdd",
+            "args": {
+                "input0": "layer6/Reshape_1",
+                "input1": "layer6/Const",
+                "name": "layer6/BiasAdd",
+                "op": "BiasAdd"
+            },
+            "pid": 1,
+            "ts": 1504946325469132,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 6
+        },
+        {
+            "name": "Relu",
+            "args": {
+                "input0": "layer6/BiasAdd",
+                "name": "layer6/Relu",
+                "op": "Relu"
+            },
+            "pid": 1,
+            "ts": 1504946325469139,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 3
+        },
+        {
+            "name": "Pad",
+            "args": {
+                "input0": "layer6/Relu",
+                "input1": "layer7/Pad/paddings",
+                "name": "layer7/Pad",
+                "op": "Pad"
+            },
+            "pid": 1,
+            "ts": 1504946325469143,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 2
+        },
+        {
+            "name": "Conv2D",
+            "args": {
+                "input0": "layer7/Pad",
+                "input1": "layer7/pool_conv/weights/read",
+                "name": "layer7/pool_conv/convolution",
+                "op": "Conv2D"
+            },
+            "pid": 1,
+            "ts": 1504946325469148,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 826
+        },
+        {
+            "name": "ExtractImagePatches",
+            "args": {
+                "input0": "layer7/pool_conv/convolution",
+                "name": "layer7/ExtractImagePatches",
+                "op": "ExtractImagePatches"
+            },
+            "pid": 1,
+            "ts": 1504946325469976,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 6
+        },
+        {
+            "name": "Transpose",
+            "args": {
+                "input0": "layer7/ExtractImagePatches",
+                "input1": "layer7/transpose/perm",
+                "name": "layer7/transpose",
+                "op": "Transpose"
+            },
+            "pid": 1,
+            "ts": 1504946325469984,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 2
+        },
+        {
+            "name": "Reshape",
+            "args": {
+                "input0": "layer7/transpose",
+                "input1": "layer7/Reshape/shape",
+                "name": "layer7/Reshape",
+                "op": "Reshape"
+            },
+            "pid": 1,
+            "ts": 1504946325469988,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 2
+        },
+        {
+            "name": "layer7/Reshape/shape",
+            "pid": 1,
+            "ts": 1504946325373024,
+            "cat": "DataFlow",
+            "tid": 1,
+            "ph": "s",
+            "id": 0
+        },
+        {
+            "name": "layer7/Reshape/shape",
+            "pid": 1,
+            "ts": 1504946325469988,
+            "cat": "DataFlow",
+            "tid": 0,
+            "ph": "t",
+            "id": 0
+        },
+        {
+            "name": "SparseTensorDenseMatMul",
+            "args": {
+                "input2": "layer7/SparseTensor/dense_shape",
+                "input3": "layer7/Reshape",
+                "input0": "layer7/SparseTensor/indices",
+                "input1": "layer7/SparseTensor/values",
+                "name": "layer7/SparseTensorDenseMatMul/SparseTensorDenseMatMul",
+                "op": "SparseTensorDenseMatMul"
+            },
+            "pid": 1,
+            "ts": 1504946325469991,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 17
+        },
+        {
+            "name": "Rank",
+            "args": {
+                "input0": "layer7/SparseTensorDenseMatMul/SparseTensorDenseMatMul",
+                "name": "layer7/transpose_1/Rank",
+                "op": "Rank"
+            },
+            "pid": 1,
+            "ts": 1504946325470010,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 2
+        },
+        {
+            "name": "Range",
+            "args": {
+                "input2": "layer7/transpose_1/Range/delta",
+                "input0": "layer7/transpose_1/Range/start",
+                "input1": "layer7/transpose_1/Rank",
+                "name": "layer7/transpose_1/Range",
+                "op": "Range"
+            },
+            "pid": 1,
+            "ts": 1504946325470016,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 3
+        },
+        {
+            "name": "Sub",
+            "args": {
+                "input0": "layer7/transpose_1/Rank",
+                "input1": "layer7/transpose_1/sub/y",
+                "name": "layer7/transpose_1/sub",
+                "op": "Sub"
+            },
+            "pid": 1,
+            "ts": 1504946325470021,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 2
+        },
+        {
+            "name": "Sub",
+            "args": {
+                "input0": "layer7/transpose_1/sub",
+                "input1": "layer7/transpose_1/Range",
+                "name": "layer7/transpose_1/sub_1",
+                "op": "Sub"
+            },
+            "pid": 1,
+            "ts": 1504946325470024,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 3
+        },
+        {
+            "name": "Transpose",
+            "args": {
+                "input0": "layer7/SparseTensorDenseMatMul/SparseTensorDenseMatMul",
+                "input1": "layer7/transpose_1/sub_1",
+                "name": "layer7/transpose_1",
+                "op": "Transpose"
+            },
+            "pid": 1,
+            "ts": 1504946325470029,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 2
+        },
+        {
+            "name": "Reshape",
+            "args": {
+                "input0": "layer7/transpose_1",
+                "input1": "layer7/Reshape_1/shape",
+                "name": "layer7/Reshape_1",
+                "op": "Reshape"
+            },
+            "pid": 1,
+            "ts": 1504946325470033,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 2
+        },
+        {
+            "name": "BiasAdd",
+            "args": {
+                "input0": "layer7/Reshape_1",
+                "input1": "layer7/Const",
+                "name": "layer7/BiasAdd",
+                "op": "BiasAdd"
+            },
+            "pid": 1,
+            "ts": 1504946325470036,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 5
+        },
+        {
+            "name": "Relu",
+            "args": {
+                "input0": "layer7/BiasAdd",
+                "name": "layer7/Relu",
+                "op": "Relu"
+            },
+            "pid": 1,
+            "ts": 1504946325470043,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 2
+        },
+        {
+            "name": "Reshape",
+            "args": {
+                "input0": "layer7/Relu",
+                "input1": "layer8/Reshape/shape",
+                "name": "layer8/Reshape",
+                "op": "Reshape"
+            },
+            "pid": 1,
+            "ts": 1504946325470046,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 3
+        },
+        {
+            "name": "MatMul",
+            "args": {
+                "input0": "layer8/Reshape",
+                "input1": "layer8/fully_connected/weights/read",
+                "name": "layer8/fully_connected/MatMul",
+                "op": "MatMul"
+            },
+            "pid": 1,
+            "ts": 1504946325470050,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 18
+        },
+        {
+            "name": "BiasAdd",
+            "args": {
+                "input0": "layer8/fully_connected/MatMul",
+                "input1": "layer8/fully_connected/biases/read",
+                "name": "layer8/fully_connected/BiasAdd",
+                "op": "BiasAdd"
+            },
+            "pid": 1,
+            "ts": 1504946325470070,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 3
+        },
+        {
+            "name": "Softmax",
+            "args": {
+                "input0": "layer8/fully_connected/BiasAdd",
+                "name": "Softmax",
+                "op": "Softmax"
+            },
+            "pid": 1,
+            "ts": 1504946325470076,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 4
+        },
+        {
+            "name": "_Retval",
+            "args": {
+                "input0": "Softmax",
+                "name": "_retval_Softmax_0_0",
+                "op": "_Retval"
+            },
+            "pid": 1,
+            "ts": 1504946325470081,
+            "cat": "Op",
+            "tid": 0,
+            "ph": "X",
+            "dur": 6
+        }
+    ]
+}

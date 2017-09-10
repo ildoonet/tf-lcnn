@@ -1,9 +1,19 @@
 import math
+import logging
+import numpy as np
 import tensorflow as tf
 import tensorflow.contrib.slim as slim
 from tensorflow.python.framework import tensor_shape
 from tensorflow.python.layers import base
 from tensorflow.python.layers.convolutional import _Conv
+
+try:
+    sparse_conv2d_m = tf.load_op_library('/root/repos/tensorflow/bazel-bin/tensorflow/core/user_ops/sparse_conv2d.so')
+except Exception as e:
+    logging.warning(str(e))
+
+dense_layers = {}
+dense_weights = {}
 
 
 class LookupAlignConvolution2d(_Conv):
@@ -60,7 +70,7 @@ class LookupAlignConvolution2d(_Conv):
         input_dim = input_shape[channel_axis].value
         kernel_shape = self.kernel_size + (input_dim, self.filters)
 
-        # activation for kernel weight
+        # dense kernel
         self.kernel_pre = self.add_variable(name='kernel_pre',
                                             shape=kernel_shape,
                                             initializer=self.kernel_initializer,
@@ -91,7 +101,6 @@ def lookupalign_conv(inputs,
                      kernel_size,
                      strides=(1, 1),
                      padding='valid',
-                     data_format='channels_last',
                      dilation_rate=(1, 1),
                      activation=None,
                      use_bias=True,
@@ -109,7 +118,7 @@ def lookupalign_conv(inputs,
         kernel_size=kernel_size,
         strides=strides,
         padding=padding,
-        data_format=data_format,
+        data_format='channels_last',
         dilation_rate=dilation_rate,
         activation=activation,
         use_bias=use_bias,
@@ -124,12 +133,13 @@ def lookupalign_conv(inputs,
         dtype=inputs.dtype.base_dtype,
         _reuse=reuse,
         _scope=name)
-    return layer.apply(inputs)
+    return layer.apply(inputs), layer
 
 
-def lookup_conv2d(tensor_in, num_outputs, kernel_size, stride, dict_size, padding='same',
-                  param_lambda=0.1,
-                  initial_sparsity=None, activation_fn=None):
+def lookup_conv2d(tensor_in, num_outputs, kernel_size, stride, dict_size, padding=1,
+                  param_lambda=0.3,
+                  initial_sparsity=None, activation_fn=None,
+                  biases_initializer=slim.init_ops.zeros_initializer()):
 
     if not initial_sparsity:
         initial_sparsity = 0.5
@@ -138,17 +148,93 @@ def lookup_conv2d(tensor_in, num_outputs, kernel_size, stride, dict_size, paddin
     if isinstance(stride, int):
         stride = [stride, stride]
     sparse_th = initial_sparsity / math.sqrt(kernel_size[0] * kernel_size[1] * dict_size)
+    stddev = 1./math.sqrt(kernel_size[0] * kernel_size[1] * dict_size)
 
-    pool_conv = slim.convolution2d(inputs=tensor_in, num_outputs=dict_size, kernel_size=[1, 1], stride=1,
-                                   padding=padding,
+    padded = tf.pad(tensor_in, [[0, 0], [padding, padding], [padding, padding], [0, 0]], "CONSTANT")
+    pool_conv = slim.convolution2d(inputs=padded, num_outputs=dict_size, kernel_size=[1, 1], stride=1,
+                                   padding='SAME',
                                    activation_fn=None,
                                    biases_initializer=None,
-                                   scope='/pool_conv')
-    align_conv = lookupalign_conv(inputs=pool_conv, filters=num_outputs, kernel_size=kernel_size,
-                                  strides=(stride[0], stride[1]), padding='valid',
-                                  param_lambda=param_lambda * sparse_th,
-                                  sparse_th=sparse_th,
-                                  activation=activation_fn,
-                                  name='align_conv')
+                                   scope='pool_conv')
 
-    return align_conv
+    scope = tf.get_default_graph().get_name_scope()
+    gen_sparse_conv = False
+    if len(dense_weights.keys()) > 0:
+        kernel_dense = dense_weights['%s/%s' % (scope, 'kernel_dense')]
+        density = np.count_nonzero(kernel_dense) / kernel_dense.size
+        if density < 0.15:
+            gen_sparse_conv = True
+
+    # activation for kernel weight
+    if gen_sparse_conv:
+        dense_kernel_shp = dense_weights['%s/%s' % (scope, 'kernel_shape')]
+        dense_kernel_idx = dense_weights['%s/%s' % (scope, 'kernel')].indices
+        dense_kernel_val = dense_weights['%s/%s' % (scope, 'kernel')].values
+        dense_bias = tf.constant(dense_weights['%s/%s' % (scope, 'bias')])
+        mode = 'custom_op'
+
+        if mode == 'tf_op':
+            # im2col - image patche matrix
+            img2col = tf.extract_image_patches(pool_conv, [1, kernel_size[0], kernel_size[1], 1], [1, stride[0], stride[1], 1], [1, 1, 1, 1], 'VALID')
+            img2col = tf.transpose(img2col, [0, 3, 1, 2])
+            img2col_shape = img2col.get_shape().as_list()
+            img2col = tf.reshape(img2col, [img2col_shape[1], img2col_shape[2] * img2col_shape[3]])
+
+            # sparse kernel & bias
+            sparse_kernel = tf.SparseTensor(dense_kernel_idx, dense_kernel_val, dense_kernel_shp)
+
+            # multiplication
+            matmul = tf.sparse_tensor_dense_matmul(sparse_kernel, img2col)
+            matmul = tf.transpose(matmul)
+            matmul = tf.reshape(matmul, [1, img2col_shape[2], img2col_shape[3], dense_kernel_shp[0]])
+
+            # bias & activation
+            output = tf.nn.bias_add(matmul, dense_bias) if dense_bias is not None else matmul
+            output = tf.nn.relu(output)
+            return output
+        elif mode == 'custom_op':
+            conv = sparse_conv2d_m.sparse_conv2d(pool_conv, dense_kernel_idx, dense_kernel_val, dense_shape=dense_kernel_shp, strides=stride)
+            output = tf.nn.bias_add(conv, dense_bias) if dense_bias is not None else conv
+            output = tf.nn.relu(output)
+            return output
+        else:
+            raise
+    else:
+        # dense convolution
+        align_conv, layer = lookupalign_conv(inputs=pool_conv, filters=num_outputs, kernel_size=kernel_size,
+                                             strides=(stride[0], stride[1]), padding='valid',
+                                             param_lambda=param_lambda * sparse_th,
+                                             sparse_th=sparse_th,
+                                             activation=activation_fn,
+                                             kernel_initializer=tf.random_uniform_initializer(-1 * stddev, stddev),
+                                             bias_initializer=biases_initializer,
+                                             name='align_conv')
+
+        scope = tf.get_default_graph().get_name_scope()
+        dense_layers[scope] = layer
+
+        return align_conv
+
+
+def extract_dense_weights(sess):
+    for key in dense_layers.keys():
+        layer = dense_layers[key]
+
+        # sparse kernel
+        dense_kernel = layer.kernel
+        dense_kernel_shape = dense_kernel.get_shape().as_list()
+        # dense_kernel = tf.reshape(dense_kernel, [dense_kernel_shape[0] * dense_kernel_shape[1] * dense_kernel_shape[2],
+        #                                          dense_kernel_shape[3]])
+        # dense_kernel = tf.transpose(dense_kernel)
+        idx = tf.where(tf.not_equal(dense_kernel, 0))
+        sparse_kernel = tf.SparseTensor(idx, tf.gather_nd(dense_kernel, idx), dense_kernel.get_shape())
+
+        if layer.bias is not None:
+            dk, k, b = sess.run([dense_kernel, sparse_kernel, layer.bias])
+        else:
+            dk, k = sess.run([dense_kernel, sparse_kernel])
+            b = None
+        dense_weights['%s/%s' % (key, 'kernel_dense')] = dk
+        dense_weights['%s/%s' % (key, 'kernel')] = k
+        dense_weights['%s/%s' % (key, 'kernel_shape')] = dense_kernel_shape
+        dense_weights['%s/%s' % (key, 'bias')] = b
