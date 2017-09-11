@@ -19,7 +19,9 @@ This also have an implementations multi-gpu training codes for various models, s
 [x] Inference Code - Optimized Dense Matrix Operation by **Implementing Custom Tensorflow Operation**
 
 [] Fast inference speed as the original paper
+
   [x] Naive Lookup Convolution Processed
+
   [] TODO : OpenBlas or Eigen Implementation
 
 ## Custom Operation for Sparse Convolutional Layer
@@ -33,6 +35,7 @@ Source codes in [/ops](/ops), and it should be build before run the inference co
 ```
 $ cp {tf-lcnn}/ops/* {tensorflow}/tensorflow/core/user_ops/
 $ bazel build --config opt --cxxopt="-D_GLIBCXX_USE_CXX11_ABI=0" //tensorflow/core/user_ops:sparse_conv2d
+$ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:{tensorflow}/bazel-bin/tensorflow/core/user_ops/
 ```
 
 ### Performance
@@ -73,7 +76,7 @@ The original paper was not evaluated on MNIST, but the dataset was suitable for 
 | Alexnet         | Convolution          | 140ms / 99.42       | 4 GPU      | 27m (x3.5)    | Epoch 40, Batch 512 |
 | | | | | |
 | Alexnet         | LCNN-Fast            | 15ms / 99.24%       | 8 GPU      | 23m           | Epoch 40, Batch 128 |
-| Alexnet         | LCNN-Accurate        | 26ms / 99.43%       | 8 GPU      | 23m           | Epoch 40, Batch 128 |
+| Alexnet         | LCNN-Accurate        | 56ms / 99.43%       | 8 GPU      | 23m           | Epoch 40, Batch 128 |
 
 ### Imagenet ILSVRC2012 Classification Task
 
