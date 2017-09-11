@@ -20,9 +20,9 @@ This also have an implementations multi-gpu training codes for various models, s
 
 [] Fast inference speed as the original paper
 
-  [x] Naive Lookup Convolution Processed
+  - [x] Naive Lookup Convolution Processed
 
-  [] TODO : OpenBlas or Eigen Implementation
+  - [] TODO : OpenBlas or Eigen Implementation
 
 ## Custom Operation for Sparse Convolutional Layer
 
@@ -72,13 +72,15 @@ The original paper was not evaluated on MNIST, but the dataset was suitable for 
 
 | Model           | Conv. Filter         | Inference (Top1)    | GPU | Training Time | Etc                        |
 |:----------------|:---------------------|:--------------------|-----------:|:--------------|:---------------------------|
-| Alexnet         | Convolution          | 140ms / 99.98       | 1 GPU      | 1h 35m        | Epoch 40, Batch 128 |
-| Alexnet         | Convolution          | 140ms / 99.42       | 4 GPU      | 27m (x3.5)    | Epoch 40, Batch 512 |
+| Alexnet         | Convolution          | 140ms / 99.98%      | 1 GPU      | 1h 35m        | Epoch 40, Batch 128 |
+| Alexnet         | Convolution          | 140ms / 99.42%      | 4 GPU      | 27m (x3.5)    | Epoch 40, Batch 512 |
 | | | | | |
 | Alexnet         | LCNN-Fast            | 15ms / 99.24%       | 8 GPU      | 23m           | Epoch 40, Batch 128 |
 | Alexnet         | LCNN-Accurate        | 56ms / 99.43%       | 8 GPU      | 23m           | Epoch 40, Batch 128 |
 
 ### Imagenet ILSVRC2012 Classification Task
+
+Tests are in progress. Below is a partial result, and it will be updated soon.
 
 * LCNN-Fast
   * Dictionary Size : 3, 30, 30, 30, 30, 512, 512
