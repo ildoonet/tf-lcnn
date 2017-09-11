@@ -1,4 +1,4 @@
-# tf-lcnn : Predict Faster using Models Trained Fast with Multi-GPUs
+# tf-lcnn : Fast Inference on CPU based on 'LCNN'
 
 Tensorflow implementation for ['LCNN: Lookup-based Convolutional Neural Network'](https://arxiv.org/abs/1611.06473)
 
@@ -16,9 +16,11 @@ This also have an implementations multi-gpu training codes for various models, s
 
 [x] Same training result as the original paper
 
-[x] Inference Code - Optimized Dense Matrix Operation
+[x] Inference Code - Optimized Dense Matrix Operation by **Implementing Custom Tensorflow Operation**
 
-[x] Fast inference speed as the original paper
+[] Fast inference speed as the original paper
+  [x] Naive Lookup Convolution Processed
+  [] TODO : OpenBlas or Eigen Implementation
 
 ## Custom Operation for Sparse Convolutional Layer
 
@@ -35,49 +37,69 @@ $ bazel build --config opt --cxxopt="-D_GLIBCXX_USE_CXX11_ABI=0" //tensorflow/co
 
 ### Performance
 
-As you can see below timeline, this custom lookup convolutional operation has very little weight in the whole time.
+As you can see below timeline, this custom lookup convolutional operation has very little weight in the whole time, when compared relatively with normal convolutional layer.
 
 ![inference timeline](/images/timeline_alexnet.png)
 
-* Alexnet, Total inference time 26ms
-* 1 core, single thread
+* LCNN-Fast Configuration
+* **1 core, single thread** : all tests has been proceeded under this condition.
 
 ## Training Results
 
 Alexnet's Fully connected layer was replaced with convolutional layer. 
+Codes will be optimized soon and inference times will be updated.
 
-* Codes will be optimized soon and inference times will be updated.
+* LCNN-Fast
+  * Dictionary Size : 3, 30, 30, 30, 30, 512, 512
+  * Lambda : 0.3
+* LCNN-Accurate
+  * Dictionary Size : 3, 500, 500, 500, 30, 1024, 1024
+  * Lambda : 0.4
 
 ### MNIST Dataset
 
 For LCNN Model, Two versions of networks were trained for experiments.
 
 * LCNN-Fast
-  * Dictionary Size : 3, 30, 30, 30, 30, 512, 512
   * Sparsity : 0.083, 0.034, 0.008, 0.013, 0.027, 0.001, 0.002
 * LCNN-Accurate
-  * Dictionary Size : 3, 500, 500, 500, 30, 1024, 1024
-  * Sparsity : 
+  * Sparsity : 0.129692, 0.040347, 0.029106, 0.034359, 0.071412, 0.006175, 0.007571
 
 The original paper was not evaluated on MNIST, but the dataset was suitable for rapid experiments.
 
-| Model           | Conv. Filter         | Inference           | GPU | Training Time | Etc                        |
+| Model           | Conv. Filter         | Inference (Top1)    | GPU | Training Time | Etc                        |
 |:----------------|:---------------------|:--------------------|-----------:|:--------------|:---------------------------|
-| Alexnet         | Convolution          | - / 99.98%          | 1 GPU      | 1h 35m        | Epoch 40, Batch 128 |
-| Alexnet         | Convolution          | - / 99.22%          | 4 GPU      | 27m (x3.5)    | Epoch 40, Batch 512 |
+| Alexnet         | Convolution          | 140ms / 99.98       | 1 GPU      | 1h 35m        | Epoch 40, Batch 128 |
+| Alexnet         | Convolution          | 140ms / 99.42       | 4 GPU      | 27m (x3.5)    | Epoch 40, Batch 512 |
 | | | | | |
-| Alexnet         | LCNN-Fast            | 26ms / 99.87%       | 8 GPU      | 23m           | Epoch 40, Batch 128 |
-| Alexnet         | LCNN-Accurate        | - /99.43%           | 8 GPU      | 23m           | Epoch 40, Batch 128 |
+| Alexnet         | LCNN-Fast            | 15ms / 99.24%       | 8 GPU      | 23m           | Epoch 40, Batch 128 |
+| Alexnet         | LCNN-Accurate        | 26ms / 99.43%       | 8 GPU      | 23m           | Epoch 40, Batch 128 |
 
 ### Imagenet ILSVRC2012 Classification Task
 
-| Model           | Convolutional Filter | GPU                 | Accuracy(Top1/Top5) | Training Time         | Etc                        |
-|:----------------|:---------------------|:--------------------|--------------------:|:----------------------|:---------------------------|
-| Alexnet         | Convolution          | 1 GPU               | 59.40% / 81.50%     | 53h                   | Epoch 65, Batch 128        |
-| Alexnet         | Convolution          | 4 GPU               | 59.21% / 81.33%     | 14h (x3.78)           | Epoch 65, Batch 128        |
+* LCNN-Fast
+  * Dictionary Size : 3, 30, 30, 30, 30, 512, 512
+* LCNN-Mid
+* LCNN-Accurate
+  * Dictionary Size : 3, 500, 500, 500, 30, 1024, 1024
+
+| Model           | Conv. Filter    | Inference (Top1/Top5) | GPU     | Training Time         | Etc                        |
+|:----------------|:----------------|--------------------:|:--------|:----------------------|:---------------------------|
+| Alexnet         | Convolution     | 144ms / 59.40%, 81.50%    | 1 GPU   | 53h                   | Epoch 65, Batch 128        |
+| Alexnet         | Convolution     | 144ms / 59.21%, 81.33%    | 4 GPU   | 14h (x3.78)           | Epoch 65, Batch 128        |
 | | | | | |
-| Alexnet-LCNN    | LCNN-Fast            | 1 GPU               |                     |                       | Epoch 65, Batch 128        |
-| Alexnet-LCNN    | LCNN-Accurate        | 1 GPU               |                     |                       | Epoch 65, Batch 128        |
+| Alexnet-LCNN    | LCNN-Fast       | 15ms / 50.60%, 72.34% | 1 GPU   | 46h                 | Epoch 65, Batch 128        |
+| Alexnet-LCNN    | LCNN-Mid        | | | | |
+| Alexnet-LCNN    | LCNN-Accurate   | 62ms / 58.17%, 78.54% | 1 GPU   | 47h                 | Epoch 65, Batch 128        |
+
+TODO : More tests on Resnet and etcs.
+
+The experimental results from the original paper are as follows.
+
+![lcnn result table](/images/paper_table1.png)
+
+![lcnn result table](/images/paper_table2.png)
+
 
 ----
 

@@ -174,6 +174,7 @@ def lookup_conv2d(tensor_in, num_outputs, kernel_size, stride, dict_size, paddin
         mode = 'custom_op'
 
         if mode == 'tf_op':
+            # sparse convolution using only tensorflow's operations. -- SLOW!
             # im2col - image patche matrix
             img2col = tf.extract_image_patches(pool_conv, [1, kernel_size[0], kernel_size[1], 1], [1, stride[0], stride[1], 1], [1, 1, 1, 1], 'VALID')
             img2col = tf.transpose(img2col, [0, 3, 1, 2])

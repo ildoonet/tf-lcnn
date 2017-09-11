@@ -16,25 +16,11 @@ datasets:
     lrepoch: [13, 14, 16, 32, 53]
 
 model_conf:
-
   lcnnfast:
     initial_sparsity: [0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01]
     dictionary: [3, 30, 30, 30, 30, 512, 512]
     lambda: 1.0
-
-  lcnnaccurate1:
+  lcnnaccurate:
     initial_sparsity: [0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01]
     dictionary: [3, 500, 500, 500, 30, 1024, 1024]
-    lambda: 0.1
-  lcnnaccurate7:
-    initial_sparsity: [0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01]
-    dictionary: [3, 500, 500, 500, 30, 1024, 1024]
-    lambda: 0.7
-  lcnnaccurate8:
-    initial_sparsity: [0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01]
-    dictionary: [3, 500, 500, 500, 30, 1024, 1024]
-    lambda: 0.8
-  lcnnaccurate9:
-    initial_sparsity: [0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01]
-    dictionary: [3, 500, 500, 500, 30, 1024, 1024]
-    lambda: 0.9
+    lambda: 0.3
