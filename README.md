@@ -32,9 +32,11 @@ Custom Operation have been implemented for LCNN's lookup convolution.
 
 Source codes in [/ops](/ops), and it should be build before run the inference code.
 
+(Recommend tensorflow build with '-mavx -msse4.1 -msse4.2' options)
+
 ```
 $ cp {tf-lcnn}/ops/* {tensorflow}/tensorflow/core/user_ops/
-$ bazel build --config opt --cxxopt="-D_GLIBCXX_USE_CXX11_ABI=0" //tensorflow/core/user_ops:sparse_conv2d
+$ bazel build --config opt --cxxopt="-D_GLIBCXX_USE_CXX11_ABI=0" //tensorflow/core/user_ops:sparse_conv2d.so
 $ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:{tensorflow}/bazel-bin/tensorflow/core/user_ops/
 ```
 
@@ -66,7 +68,7 @@ For LCNN Model, Two versions of networks were trained for experiments.
 * LCNN-Fast
   * Sparsity : 0.083, 0.034, 0.008, 0.013, 0.027, 0.001, 0.002
 * LCNN-Accurate
-  * Sparsity : 0.129692, 0.040347, 0.029106, 0.034359, 0.071412, 0.006175, 0.007571
+  * Sparsity : 0.129, 0.040, 0.029, 0.034, 0.071, 0.006, 0.007
 
 The original paper was not evaluated on MNIST, but the dataset was suitable for rapid experiments.
 
